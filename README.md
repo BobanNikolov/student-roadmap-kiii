@@ -1,5 +1,5 @@
 # README #
-This project was set up by Mihajlo Rashajkovski.
+This project was set up by Boban Nikolov.
 Backend: Quarkus
 Frontend: Vue
 
