@@ -3,6 +3,8 @@ version: '3'
 volumes:
   postgres:
   pgadmin:
+  server:
+  frontend:
   postgres_data:
     driver: local
 
@@ -59,7 +61,7 @@ services:
     build:
       context: ./fcr-frontend
       dockerfile: Dockerfile
-    command: [ "npm", "start" ]
+    command: [ "npm", "run", "dev" ]
     ports:
       - "3000:3000"
     depends_on:

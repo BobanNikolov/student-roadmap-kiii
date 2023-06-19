@@ -1,9 +1,25 @@
-FROM registry.access.redhat.com/ubi8/openjdk-17:1.15
+# Use a suitable base image for Java and Maven
+FROM maven:3.8.4-openjdk-17 AS build
 
+# Set the working directory inside the container
 WORKDIR /app
 
+# Copy the Quarkus application files to the container
 COPY . .
 
-RUN ./mvnw clean install -DskipTests
+# Build the Quarkus application
+RUN mvn clean install -DskipTests
 
-CMD ["java", "-jar", "./target/fcr-backend-1.0-SNAPSHOT.jar"]
+# Use a lighter base image for the runtime
+FROM registry.access.redhat.com/ubi8/openjdk-17:1.15
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the built JAR from the build stage
+COPY --from=build /app/target/quarkus-app/quarkus-run.jar .
+
+EXPOSE 8080
+
+# Set the command to start the Quarkus application
+CMD ["java", "-jar", "app/quarkus-run.jar"]
