@@ -14,12 +14,16 @@ RUN mvn clean install -DskipTests
 FROM registry.access.redhat.com/ubi8/openjdk-17:1.15
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /deployments/
+USER 185
 
 # Copy the built JAR from the build stage
-COPY --from=build /app/target/quarkus-app/quarkus-run.jar .
+COPY --from=build /app/target/quarkus-app/lib/ /deployments/lib/
+COPY --from=build /app/target/quarkus-app/*.jar /deployments/
+COPY --from=build /app/target/quarkus-app/app/ /deployments/app/
+COPY --from=build /app/target/quarkus-app/quarkus/ /deployments/quarkus/
 
 EXPOSE 8080
 
 # Set the command to start the Quarkus application
-CMD ["java", "-jar", "app/quarkus-run.jar"]
+CMD ["java", "-Dquarkus.http.host=0.0.0.0", "-Djava.util.logging.manager=org.jboss.logmanager.LogManager", "-jar", "/deployments/quarkus-run.jar"]
