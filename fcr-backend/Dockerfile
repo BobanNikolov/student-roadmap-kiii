@@ -26,4 +26,4 @@ COPY --from=build /app/target/quarkus-app/quarkus/ /deployments/quarkus/
 EXPOSE 8080
 
 # Set the command to start the Quarkus application
-CMD ["java", "-Dquarkus.http.host=0.0.0.0", "-Djava.util.logging.manager=org.jboss.logmanager.LogManager", "-jar", "/deployments/quarkus-run.jar"]
+CMD ["java", "-Dquarkus.http.host=0.0.0.0", "-Djava.util.logging.manager=org.jboss.logmanager.LogManager", "-Dquarkus.profile=dev", "-jar", "/deployments/quarkus-run.jar"]
