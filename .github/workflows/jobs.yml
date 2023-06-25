@@ -25,6 +25,18 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+      -
+        name: Build and push backend
+        uses: docker/build-push-action@v4
+        with:
+          context: ./fcr-backend
+          push: true
+          tags: bobannikolov/student-roadmap-backend:latest
       -
         name: Build and push frontend
         uses: docker/build-push-action@v4
