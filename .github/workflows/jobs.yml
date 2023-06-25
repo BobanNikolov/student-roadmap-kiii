@@ -31,12 +31,12 @@ jobs:
         with:
           context: ./fcr-backend
           push: true
-          tags: bobannikolov/student-roadmap-backend
+          tags: bobannikolov/student-roadmap-backend:latest
       -
         name: Build and push frontend
         uses: docker/build-push-action@v4
         with:
           context: ./fcr-frontend
           push: true
-          tags: bobannikolov/student-roadmap-frontend
+          tags: bobannikolov/student-roadmap-frontend:latest
     
