@@ -1,4 +1,4 @@
-name: Student Roadmap CI
+name: Student Roadmap CI FCR
 
 on:
   push:
