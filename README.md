@@ -18,7 +18,6 @@ This README would normally document whatever steps are necessary to get your app
 * Dependencies
 * Database configuration
 * How to run tests
-* Deployment instructions
 
 ### Contribution guidelines ###
 
